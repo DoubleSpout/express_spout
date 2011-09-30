@@ -7,7 +7,7 @@ html
   .warp
     h1 作品小秀
     include ../include/nav 
-    p.i_i <strong>node.js网络聊天室</strong><br/>简介：聊天室是基于yui+express+redis构成的，支持公开聊天，私人聊天和群聊天，也可以上传头像，带有消息提醒。对于IE用户也是支持的。聊天技术采用COMET方式的轮询，并不是WEBSOCKET长连接。其中还穿插了一个小功能，node.js的图片上传实时进度条，让上传大文件的用户不必为没有响应而烦恼。<br/><a href="#">view>></a>
+    p.i_i <strong>node.js网络聊天室</strong><br/>简介：聊天室是基于yui+express+redis构成的，支持公开聊天，私人聊天和群聊天，也可以上传头像，带有消息提醒。对于IE用户也是支持的。聊天技术采用COMET方式的轮询，并不是WEBSOCKET长连接。其中还穿插了一个小功能，node.js的图片上传实时进度条，让上传大文件的用户不必为没有响应而烦恼。<br/><a href="/chating/">view>></a>
     p.i_i <strong>山寨版google+圈子特效</strong><br/>简介：大名鼎鼎的谷歌公司最新推出的google+应用，它的圈子功能被人津津乐道。于是便参考google+的效果山寨了一次，当然google+的源码是拿不到的，算法都是自己重新写的。支持功能：多个用户的选择，拖动；将一个或多个用户拖动到下面圈子中；用户小头像会随着圆圈转上那么一圈；当新增用户进来会显示蓝色圈，当重复拖动会显示黄色圈；在一个圆圈拖满的情况，再新拖用户会将前面的去掉，转一定角度。<br/><a href="/gallery/plus/" target="_blank">view>></a>
     p.i_i <strong>AsyncProxy.js详解</strong><br/>简介：﻿如果我们使用了 AsyncProxy.js 这个插件，则可以更多关心业务，去掉异步代码深度嵌套，并且在一些情况下显著提高效率。AsyncProxy.js的实现机制是依靠node.js的emitter事件触发来做的，所以不能用在前端。有以下几个亮点：<br/>1、去掉异步代码深度嵌套，当对返回结果顺序不关心时，可以并发发送异步请求，等请求全部返回一起处理，提高效率。<br/>2、在同时有多个异步请求回来不会造成干扰，每个AsyncProxy的实例都能准确的接收自己的异步请求互不干扰<br/>3、支持链式调用，什么是链式调用呢？比如“异步1”、“异步2”，如果"异步2"需要用到"异步1"返回的数据，则必须等待"异步1"返回以后再开始异步2。对于这样耦合度高的异步请求完全支持，可以很方便的取到上一步，或者上几步的数据。<br/>4、增加异步返回状态，能够在每次异步请求返回后，知道当前已经返回异步请求数和总共需要返回请求数，方便查找性能的瓶颈。<br/><a href="/gallery/asyncproxy">view>></a>
     p.i_i <strong>jade_render.js详解</strong><br/>简介： 实现jade模版的html缓存，提升框架性能，这里是代码详解。<br/><a href="/gallery/jaderender/">view>></a>
