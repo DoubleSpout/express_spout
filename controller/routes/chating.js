@@ -85,6 +85,7 @@ home.userrenew = function(uid){//更新用户时间戳
 home.logout = function(req, res){//更新用户时间戳
 	var sid = req.session.uid;
 	if(sid)	req.session.destroy();
+	if(userlist[sid]) delete userlist[sid];
 	res.redirect('/chating/login/');
 	return true;	
 }
