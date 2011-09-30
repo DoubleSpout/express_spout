@@ -95,7 +95,7 @@ home.index = function(req, res, pathobj){
 }
 home.login = function(req, res, pathobj){ //登录页面
 	if(req.session.uid){
-			res.redirect('/chating/chating/');
+			home.logout(req, res);
 			return true;
 	}
 	var err = req.param('err') || '',
