@@ -1,0 +1,42 @@
+!!!5
+html
+ head
+  title= pagetitle
+  include ../include/head
+  <link type="text/css" rel="stylesheet" href="/skin/css/chating.css"/>
+ body
+  div.login_box
+   h1.green 欢迎您使用<br/>node.js版网络聊天室
+   -if(err !== ''){
+    h2 #{err}
+   -}
+   div.c_box
+    form#login(action="/chating/chating/", method="post")
+     <input class="login_input gray" name="name" id="name" value="" type="text" maxlength="6" autocomplete="off"/>
+     <input class="login_input gray" name="pwd" id="pwd" value="密码" type="text" maxlength="15" autocomplete="off"/>
+     <input name="face" id="face" value="/skin/img/chating/default_face.png" type="hidden" autocomplete="off"/>
+     button#login.login_button.loginbt(type="submit") 登录
+   div.clear
+   div.cf_box
+    form#upload_form(action="/upload", target="face_upload" ,method="post", enctype="multipart/form-data")
+     div.fb 
+      <input id="browse" type="button" class="login_button browse" value="浏览" autocomplete="off" />
+      <input type="file" size="1" name="face" id="face" class="file_display" hidefocus="" autocomplete="off">
+     div.ub
+      button#uploadface.login_button(type="submit") 上传
+     div.clear
+     <img src="/skin/img/chating/default_face.png" width="50" height="50" class="i_f" id="i_f" /><br/>
+     div#progress_div
+     <center>上传方法：先点浏览选择图片，再点上传按钮上传图片</center>
+     <input  name="random" id="random" value="#{random}"  type="hidden" autocomplete="off"/>
+     iframe#face_upload(name="face_upload", src="" ,style="display:none;")
+include ../include/foot
+script(type="text/javascript",src="/skin/js/chating.js")
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+!!!5
+html
+ head
+  title= pagetitle
+  include ../include/head 
+  body
+  .warp
+    h1 node.js和Mongodb聊天室
+    include ../include/nav 
+    <a href="/chating/login/" target="_blank" class="plus c_login">体验 node.js 和 Mongodb 聊天室（带头像版）</a>
+    p.i_i <strong>node.js和Mongodb聊天室框架介绍：</strong><br/>1、支持头像上传功能；<br/>2、支持公开聊天；<br/>3、支持私人聊天；<br/>4、支持群组聊天<br/>5、支持消息提醒
+    p.i_i <strong>技术特色：</strong><br/>1、利用comet技术的ajax推送，所以兼容ie6-8，ff,chrome,safari,opera等等主流浏览器；<br/>2、支持头像上传进度条的提示，做到不利用flash也可以实时监控上传进度。<br/>3、缓存部分聊天信息，每隔一定时间去往数据库内存储聊天内容。在存储过程中也有缓冲机制。
+    p.i_i <strong>访问地址：</strong><br/>
+    p.i_i <a href="http://snoopyxdy.blog.163.com/blog/static/60117440201172510426330/" target="_blank">详细聊天室实现</a>
+    p.i_i <a href="http://snoopyxdy.blog.163.com/blog/static/6011744020117301049383/" target="_blank">详细上传进度条实现</a>
+    p.i_i <a href="https://github.com/DoubleSpout/express_spout" target="_blank">聊天室源码地址</a>
+
+include ../include/foot

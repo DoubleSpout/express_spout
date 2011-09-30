@@ -1,0 +1,31 @@
+!!!5
+html
+ head
+  title= pagetitle
+  include ../include/head 
+  <body>
+  .warp
+    h1 Mongodb留言板
+    include ../include/nav 
+    p.i_i <strong>留言板简介：</strong><br />留言板基于node.js和mongodb制作，利用_id、人气制作索引，支持快速排序和搜索。为了取消后台，利用前台来管理留言板。<br/>
+    div.m_state.m_nob
+     form(action="/message/",method="get") <a href="/message/" class="plus">按日期排序</a><a href="/message/?sorting=2" class="plus">按人气排序</a><span>作者：</span><input id="sname" name="sname"  value="" class="m_i_i sname" maxlength="15" autocomplete="off"/>
+    div#msg
+     -if(total){
+      -msg.forEach(function(msgi){
+       p.i_i(id="#{msgi._id}") <strong>作者：#{msgi.name}</strong><span>人气：<font>#{msgi.plus}</font></span>时间：#{msgi.time}<br />#{msgi.content}<a class="plus" name="plus" href="javascript:;">+1</a><br /><a href="javascript:;"  name="del" class="close" style="display:none">X</a>
+      -})
+      div.m_state 
+       共 <font>#{total}</font> 篇留言<a href="javascript:;" id="getmore"  name="getmore" class="plus">查看更多留言内容</a>
+     -}
+     - else{	
+       p.i_i 无留言内容
+     -}    
+    form#send
+     p.i_i <strong>发表留言：</strong>
+     p.i_i.m_i 作 者：<input name="name" id="name" value="" class="m_i_i" maxlength="15" autocomplete="off"/>
+     p.i_i.m_i 内 容：<input name="content" id="content" value="" class="m_i_i" maxlength="60" autocomplete="off" >
+     p.i_i.m_i <a id="ajaxsub" class="plus" href="javascript:;">提交</a><input type="submit" value="提交" class="none"/>
+include ../include/foot
+script(type="text/javascript",src="/skin/js/msg.js")
+</body>

@@ -1,0 +1,28 @@
+!!!5
+html
+ head
+  title= pagetitle
+  include ../include/head
+  <link type="text/css" rel="stylesheet" href="/skin/css/chating.css"/>
+ body
+  <input type="hidden" value="#{sid}" id="my_uid" />
+  <input type="hidden" value="#{since}" id="since" />
+  div.chat_box
+   div#screem
+   div#member
+   div.clear
+   div#group
+   form#send(action="/chating/send/")
+    <input name="send_c" id="send_c" value="" maxlength="30" autocomplete="off" />
+    button.hidden(type="submit")
+    a.logout(href="/chating/logout/") 退出登录
+   div.box#p_box(style="display:none;")
+    div#p_status.box_status 您正在和<span id="p_name" class="green" uid=""> xxxx </span>聊天
+     a.box_close#p_close(href="javascript:;") X
+    div#p_screem.box_screem
+    form#p_send_form(action="/")
+     <input id="p_send" name="p_send" value=""maxlength="30" class="box_send" autocomplete="off"  >
+     button.hidden(type="submit")
+   div.clear
+include ../include/foot
+script(type="text/javascript",src="/skin/js/chating.js")

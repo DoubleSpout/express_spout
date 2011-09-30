@@ -1,0 +1,48 @@
+!!!5
+html
+ head
+  title= pagetitle
+  include ../include/head 
+  <body>
+  .warp
+    h1 作品小秀-AsyncProxy代码详解
+    include ../include/nav 
+    p.i_i <strong>AsyncProxy代码详解</strong><br/>﻿AsyncProxy.js的实现机制是依靠node.js的emitter事件触发来做的，所以不能用在前端。<br/>1、支持链式调用，什么是链式调用呢？比如“异步1”、“异步2”，如果"异步2"需要用到"异步1"返回的数据，则必须等待"异步1"返回以后再开始异步2。对于这样耦合度高的异步请求完全支持，可以很方便的取到上一步，或者上几步的数据。<br/>2、增加异步返回状态，能够在每次异步请求返回后，知道当前已经返回异步请求数和总共需要返回请求数，方便查找系统的瓶颈。<br/>3、没有eventproxy.js的always功能，只有once功能。<br/>4、gc需要手动处理。
+    p.i_i 代码地址：https://github.com/DoubleSpout/node.js---AsyncProxy ，内有测试代码。
+    p.i_i <pre>
+              <em>var events =  require("events"); </em>
+              <em>module.exports =  AsyncProxy = function(ischain){//输出异步事件的类</em>
+              <em>      this.emitter = new events.EventEmitter();</em>
+              <em>      this.eventname = 'AsyncProxy';</em>
+              <em>      this.data = [];//存放异步返回的数据</em>
+              <em>  	this.ischain = ischain||false; //是否链式调用,默认是false</em>
+              <em>}
+              <em>AsyncProxy.prototype.addlistener = function(){ //建立事件监听函数</em>
+              <em>      var ap = this;</em>
+              <em>      ap.emitter.on(ap.eventname,function(order, data){</em>
+              <em> 		ap.prev = ap.data[order] = data;</em>
+              <em>  	if(--ap.length===0){//是否全部异步请求都返回</em>
+              <em>          	ap.callback(ap.data);//执行最终回调</em>
+              <em>     		  	ap.emitter.removeAllListeners(ap.eventname);//删除监听</em>
+              <em>    		}</em>
+              <em> 	})</em>
+              <em>} </em>
+              <em>AsyncProxy.prototype.rec = function(order, data){ //当异步返回入口</em>
+              <em>      this.emitter.emit(this.eventname, order, data);//触发数据返回事件的监听器 </em>
+              <em>	    if(this.ischain && ++order<this.asyncs.length){ this.asyncs[order](order);}//如果是链式调用，则执行下一个异步函数</em>
+              <em>     	return {total:this.asyncs.length, rec:this.asyncs.length - this.length}//返回异步返回信息</em>
+              <em>} </em>
+              <em>AsyncProxy.prototype.ap = function(){ //主入口</em>
+              <em>      var ap = this, i=0, len = arguments.length - 1;</em>
+              <em>      ap.asyncs = [].slice.apply(arguments, [0, len]); //将参数eventname1-n转存成events 数组</em>
+              <em>    	ap.callback = arguments[len];//最终回调放入ap.callback</em>
+              <em>    	ap.addlistener();//开始监听</em>
+              <em>   	if((ap.length=ap.asyncs.length)&&!ap.ischain){ //如果非链式调用</em>
+              <em> 	        	while(i++ < ap.asyncs.length){ ap.asyncs[i-1](i-1);}//非链式调用则一起发送异步请求</em>
+              <em>     	}</em>
+              <em>    	else ap.asyncs[0](0);//链式调用则发送第一个异步请求</em></em>
+              <em>    	return ap.asyncs.length;
+              <em>}</em>             
+          </pre>
+include ../include/foot
+</body>

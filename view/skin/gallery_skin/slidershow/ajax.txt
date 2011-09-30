@@ -1,0 +1,10 @@
+[{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if1"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if2"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if3"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if4"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if5"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if6"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if7"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if8"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if9"},
+{"img":"/skin/gallery_skin/slidershow/face.png","text":"By default the Content-Type response header is set, however if10"}]

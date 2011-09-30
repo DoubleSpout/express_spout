@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+body{background-color:#353129;color:#eee;font-size:12px;}
+h1 { font-family: "微软雅黑"; margin-bottom:30px;}
+p{font-size:13px;}
+.green{color:#8bc84b}
+.green2 {color:#c3cc88}
+.gray {color:#777 !important;}
+.login_box { margin:0px auto; width:400px;text-align:center; }
+.login_input {display:block; border:none; border-bottom:#fff 2px solid; height:30px; width:200px; line-height:30px; text-indent:3px;background-color:#353129;color:#fff;font-size:14px;}
+.login_button { border: none; background-color:#8bc84b; text-align:center; color:#fff; padding:3px 5px;margin-left:20px;cursor:pointer}
+.login_button:hover {background-color:#c3cc88; }
+.login_box p { color:#f90; font-size:14px; line-height:30px;}
+.hidden {display:none;}
+.clear {clear:both;}
+#name { width:200px !important;}
+
+.c_box { position:relative; padding-left:60px; width:340px; text-align:left}
+.cf_box { padding-top:40px; text-align:left}
+.loginbt {display:block; position:absolute; top:43px; left:260px; width:50px; height:25px;}
+
+.chat_box { margin:0 auto; width:1000px; height:100%;}
+#screem {width:800px; height:420px;float:left; border-right:#fff 1px dashed;overflow:auto; line-height: 20px;}
+#member {wdith:184px; height:420px;float:left; padding-left:15px;overflow:auto}
+#send_c, #p_send, #g_send{display:block;margin:20px 0;width:800px; height:30px; line-height:30px;color:#fff;font-size:16px;border:none;background-color:#49453e;text-indent:5px;}
+.logout{float:right;margin-right:100px; color:#fff;}
+.new_msg{font-weight:bolder; color:#6EAFD5;}
+.my {font-weight:bolder; color:#c00;}
+#group {width:1000px; line-height:30px;}
+#group span {padding:4px 5px;cursor:pointer; }
+#group span:hover { background-color:#49453e; }
+#member p img {width:30px; height:30px; border:none;margin-right:10px;}
+#member p{height:30px; width:140px; line-height:25px; padding:5px 10px;cursor:pointer;}
+#member p:hover{ background-color:#49453e;}
+/*私聊*/
+
+.box { position:absolute; left:50%; margin-left:-310px; top:10%; width:600px; height:400px; background-color:#353129; border:#e0e0e0 10px solid;}
+.box_status {width:600px; height:35px; line-height:35px; color:#fff; position:relative; text-indent:10px;background-color:#49453e; }
+.box_screem {width:580px; padding:10px; height:280px;overflow:auto; position:relative;line-height: 20px;}
+.box_close{text-decoration:none;padding:1px 4px; font-family:Arial, Helvetica, sans-serif;position:absolute;  top:6px;right:7px; display:block;    line-height: 17px;text-indent: 0px;}
+.box_close:link, .box_close:visited{color:#fff;text-decoration:none;background-color:#8bc84b;}
+.box_close:hover, .box_close:active{text-decoration:none;background-color:#fff;color:#8bc84b}
+.box_send {width:600px !important;}
+.box img {width:18px; height:18px;margin-right:3px;}
+
+
+.creat_group {color:#fff;}
+#c_screem {height:230px;}
+#c_screem p {float:left; padding:3px 10px;cursor:pointer;}
+#c_added_list { height:35px; padding:0 20px;}
+#c_added_list  span {padding:2px 10px;}
+#c_box b {padding-left:10px;}
+.button {border:none;display:block;margin:10px auto; background-color:#8bc84b; color:#fff; cursor:pointer; height:30px;width:55px;}
+.del_button {clear:both; width:120px; position:absolute; right:0; top:25px; cursor:pointer; z-index:9999;}
+
+
+
+/*图片上传*/
+.fb {overflow: hidden; position: relative;width:65px; height:30px; float:left; margin-left:100px;}
+.browse {cursor: pointer;display:block; position:absolute; top:0px;left:0px; width:48px; height:23px;}
+#uploadface {width:48px; height:23px;}
+.file_display{width:110px;/*这个宽度不能删除*/height:27px;filter:alpha(opacity=0);/*利用CSS滤镜让默认按钮为透明*/opacity:0;  position:absolute;cursor:pointer;left:-20px;top:0px; z-index:999;}
+.ub {width:80px; height:30px; float:left;}
+.i_f {display:block; margin:10px 0 0 164px; clear:both; width:30px; height:30px;}
+#progress_div {clear:both;height:20px; text-indent: 167px; text-align:left;}
+/*图片上传*/

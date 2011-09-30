@@ -1,0 +1,29 @@
+!!!5
+html
+ head
+  title= pagetitle
+  include ../include/head 
+  body
+  .warp
+    h1 express_spout（基于expressjs的nodejs网站框架）
+    include ../include/nav 
+    p.i_i <strong>express_spout框架介绍：</strong><br/>基于expressjs的框架，增加了一些方法和加强了一些功能。<br/>作者联系方式：<br/><em>email:snoopyxdy@163.com;<br/>qq:53822985;<br/>blog:http://snoopyxdy.blog.163.com/</em><br /><strong>A、加强路由功能</strong><br/>增加重新拼接URL去找控制器功能，如果控制器没找到，会尝试着输出对应url的jade模版，否则输出404。<br/>举个例子：<br/>例如用户输入：<em>http://10.1.10.224:3000/user/face</em><br/>1、会先去<em>require</em>加载<em>"./routes/user"</em>，执行里面的<em>face</em>方法，并将<em>req</em>和<em>res</em>两个参数传递进去，如果是3级菜单，以此类推；<br/>2、如果1失败，则会自动去<em>view/jade/user/face.jade</em>去输出页面(这里假设没开启<em>file_cache</em>)；<br/>3、如果2失败，则会输出404页面，记录错误日志(404页面在<em>view</em>目录下，<em>404.jade</em>)。<br/><strong>B、加强日志功能</strong><br/>加载了系统模块<em>log4js.js</em>，然后做了简单的封装。<br/>日志的的等级分为：<br/>
+    p.i_i <pre>
+    <em>_logger.trace('Entering cheese testing');</em>
+    <em>_logger.debug('Got cheese.');</em>
+    <em>_logger.info('Cheese is Gouda.'); </em>
+    <em>_logger.warn('Cheese is quite smelly.');</em>
+    <em>_logger.error('Cheese is too ripe!');</em>
+    <em>_logger.fatal('Cheese was breeding ground for listeria.');</em>
+    </pre>
+    p.i_i 可以根据需要设置日志记录和显示的等级。<br/>比如设置了<em>error</em>等级，则只有<em>error</em>和<em>fatal</em>的日志会被记录到日志文件中去。日志文件也可以配置，每个日志文件的大小和备份数量。<br/><strong>C、增加multi-node多进程</strong><br/>利用<em>multi-node</em>模块多进程启动多个，然后封装了一个<em>comm</em>自定义模块。<br/>利用<em>_comm.send(data [, callback]);</em>回调里面可以做一些事情，比如同步更新一些数据等。<br/>举个例子：<br/>
+    p.i_i <pre>
+    <em>_comm.send('add_visit_num', function(d, pid){</em>
+    <em>    _visite_num++</em>
+    <em>    _logger.info('发送数据为：'+d+'当前执行进程为：'+pid+'访问数为：'+_visite_num);</em>
+    <em>   });</em>
+    </pre>
+    p.i_i 这样就发送了一条<em>'add_visit_num'</em>的信息，并且在其他进程接收到这个信息后，执行了<em>callback</em>，<em>pid</em>是当前接收信息的进程<em>id</em>，格式为：<em>master、child-0、child-1、child-2 ……</em>以此类推。<br/><strong>D：增加系统模块</strong><br/>增加了系统模块，具体使用说明系统模块内都有。<br/><strong>E、加强了jade的html缓存功能</strong><br/>jade的官方说明上有：<em>optional memory caching</em>，类似<em>smarty的内存缓存机制。</em>不过内存缓存毕竟还是要重新拼接一些变量和对<em>jade</em>的模版的编译，不如直接输出<em>html</em>来的快。<br/>可以在<em>controller/config.js</em>里设置全局的页面缓存开启或关闭还有缓存更新时间<br/>也可以在每次输出的时候带上参数<em>true</em>或者<em>false</em>来进行单独设置。单独设置会覆盖全局设置。<br/>注意：如果要开启页面缓存，可能需要做以下几步：<br/>1、分别对 <em>node_modules/jade/bin/jade</em> 和 <em>view/temp/</em> 权限设置为777<br/>2、<em>view\temp</em>  权限设置为<em>777</em><br/>3、将 <em>'nodejs安装目录/bin/node'</em> 用 <em>ln</em> 命令连接到<em>'/sbin/'</em>或<em>'/bin/'</em> 或 <em>'/etc/init.d/'</em>下，保证可以直接输入 <em>node -h</em> 不报错。<br/><em>ln</em>命令用法：软连接<br/><em>ln  –s(-n)  源文件 目标文件</em>
+    p.i_i <strong>下面简单介绍下文件分布：</strong><br/>controller：控制器<br/>logs：日志文件夹<br/>modules：自定义模块<br/>node_modules：系统模块，系统插件<br/>view：模版,CSS,JS等前端用的<br/>app.js：启动服务文件<br/>
+    p.i_i <strong>框架性能：</strong><br/>内网单4CPU服务器，在1000和3000客户端并发http请求时的RPS：<br/>裸框架：<em> 3875 req/sec, 3795 req/sec</em><br />html缓存静态新闻页输出：<em> 2041 req/sec, 1889 req/sec</em><br />jade模版动态新闻页输出：<em> 1046 req/sec, 907 req/sec</em><br />
+include ../include/foot

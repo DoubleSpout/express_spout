@@ -1,0 +1,47 @@
+/*全站通用*/
+body { margin:0; padding:0;background-color:#222; font-family:"宋体"; font-size: 13px;color:#d8d8d8;}
+div,span,dl,dt,dd,ul,ol,li,p,h1,h2,h3,h4,h5,h6,img,form{padding:0;margin:0;border:none;}
+img{border:none;margin:0;padding:0;}
+ul,ol,li{list-style:none;}
+a{text-decoration:none;}
+a:link{color:#f70;text-decoration:none;}
+a:visited{color:#f70;text-decoration:none;}
+a:hover{color:#f70;text-decoration:underline;}
+a:active{color:#f70;text-decoration:underline;}
+h1 {color:#fff; font-size:37px; padding:30px 0 ;}
+.clear{clear:both;}
+.float {display:block; float: left;}
+.warp { width:960px;  margin:0 auto; overflow:hidden; padding-bottom:50px;}
+em {color:#C3CC88; padding:0 3px;}
+pre {widht:100%; line-height:23px; background-color:#ddd; display:block; font-size:13px; padding:10px 20px 25px; border:#aaa 3px solid; font-family:Arial, Helvetica, sans-serif;}
+pre em {color:#222; font-size:14px; font-style:normal !important;}
+p.i_i { font-size:13px; line-height:23px; display:block; position:relative;}
+p.i_i strong {color:#8BC84B; padding:30px 0 5px 0; display:inline-block; font-size:15px;}
+a.i_a { margin:0 30px 0 0; display:inline-block; padding:5px 10px;}
+a.i_a:hover{background-color:#333;}
+a.i_a:active{background-color:#333;}
+p.i_i span { display:inline-block; padding:30px 50px 5px; font-size:13px; color:#C3CC88;}
+p.i_i a.close { display:block; width:30px; height:30px; position:absolute; text-align:center; line-height:30px; font-size:16px; font-family:Arial, Helvetica, sans-serif; top:5px;  right:5px;}
+.plus{ margin-left:30px; padding:1px 6px; background-color:#f70; color:#fff;}
+.plus:link,  p.i_i .plus:visited{ background-color:#f70; color:#fff;}
+.plus:hover,  p.i_i .plus:active { text-decoration:none;background-color:#fa0; color:#fff;}
+.vnone {visibility:hidden}
+.none { display:none;}
+.foot { width:960px;  line-height:27px; padding:10px 0 30px 0; font-family:Arial, Helvetica, sans-serif; text-align:right; margin:0 auto;}
+/*全站通用*/
+/*留言板*/
+.m_state { border-bottom:#e0e0e0 1px dashed; margin:10px 0; padding:30px 0 30px 0;}
+.m_state .plus { padding:3px 15px 2px; display:inline-block;color:#fff;}
+.m_i_i { width:800px; height:30px; line-height:30px; background:none; border:none;border-bottom:#C3CC88 1px solid; font-size:14px; text-indent:5px;color:#d8d8d8;}
+.m_i { font-size:13px !important; color:#f70 !important;}
+#msg strong {color:#C3CC88;padding:15px 0 5px 0; }
+#msg .i_i { padding-left:20px; padding-bottom:25px;}
+#name { width:230px;}
+.m_i .plus { margin:10px 0 0 45px; padding:2px 15px 1px; display:inline-block; }
+.i_i_hover { background-color:#333;}
+.m_nob {border:none;margin:10px 0 0 0; padding:20px 0 0px 0;}
+.m_nob span { padding-left:30px;}
+.m_nob input { width:200px;}
+.m_nob .sname { color:#777 !important; }
+/*聊天室登录按钮*/.c_login { width:100%px; height:30px; line-height:30px; text-align:center; display:block; padding:0; margin:0; margin-top:40px;  font-size:14px; color:#fff !important;} 
+/*留言板*/
