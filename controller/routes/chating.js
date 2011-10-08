@@ -18,7 +18,7 @@ var http = require('http'),
 	files_obj={}, //临时存放上传文件信息
 	clineturl = 'source/face',
 	filedir =  path.join(_app.set('views'), clineturl),
-	maxFieldsSize = 1024 * 100;
+	maxFieldsSize = 1024 * 5;
 /*头像上传变量*/
 home.checkonline = function(req, res){
 	if(!req.session.uid || !userlist[req.session.uid]){
@@ -43,20 +43,22 @@ home.clearmax = function(){ //判断是否已经超过最长长度
 };
 home.initial = function(){ //初始化
 	_pool.acquire(function(err, db_connector){
-		    db_connector.createCollection("chatmessage", function(err, col){});
-			db_connector.createCollection("chatuser", function(err, collection){
-			   collection.ensureIndex({"username":1}, function(err, r){ //这里建立一个根据username的索引
-				   if(err) _logger.error('索引建立失败：'+err);
-				   else{ 
-						   _logger.info('索引建立名为：'+r);
-						   collection.indexInformation(function(err,array){
-								   if(!err) _logger.info('当前msg集合所有索引为：'+JSON.stringify(array))
-								   _pool.release(db_connector);
-						   });
-					   }
-				});			
+		    db_connector.createCollection("chatmessage", function(err, col){
+				db_connector.createCollection("chatuser", function(err, collection){
+				   collection.ensureIndex({"username":1}, function(err, r){ //这里建立一个根据username的索引
+					   if(err) _logger.error('索引建立失败：'+err);
+					   else{ 
+							   _logger.info('索引建立名为：'+r);
+							   collection.indexInformation(function(err,array){
+									   if(!err) _logger.info('当前msg集合所有索引为：'+JSON.stringify(array))
+									   _pool.release(db_connector);
+							   });
+						   }
+					});			
+				});
 			});
 	})
+	console.log('执行循环')
 	setInterval(function () {
 		var now = (new Date()).getTime();
 		home.clearmax();
@@ -95,8 +97,7 @@ home.index = function(req, res, pathobj){
 }
 home.login = function(req, res, pathobj){ //登录页面
 	if(req.session.uid){
-			home.logout(req, res);
-			return true;
+		req.session.destroy();
 	}
 	var err = req.param('err') || '',
 	    random_count = (new Date()).getTime()+''+Math.ceil(Math.random()*100000);
@@ -135,11 +136,24 @@ home.chating = function(req, res, pathobj){
 	}
 	_pool.acquire(function(err, db_connector){
 		db_connector.collection("chatuser", function(err, collection){
-			collection.find({'username':htmltostring(username)}).toArray(function(err, results){
-					var msgarray = results||false;//获取全部的
-					if(msgarray.length >0){//去匹配密码
-						msgarray[0].password === pwd?showchating(msgarray[0]._id, msgarray[0].face):res.redirect('/chating/login/?err=密码错误');
-						_pool.release(db_connector);
+			collection.findOne({'username':htmltostring(username)},function(err, results){
+					if(results){//去匹配密码
+						if(results.password === pwd){
+							if(face != '/skin/img/chating/default_face.png'){ //如果头像不为默认值
+								results.face = face;
+									collection.update({"_id":results._id},{$set: {"face":results.face}},{"safe":true},function(err, r){
+										_logger.info('更新老用户头像，id：'+results._id+'个数：'+r)
+										_pool.release(db_connector);
+									});
+							}
+							else _pool.release(db_connector);
+							showchating(results._id, results.face)
+						}
+						else{
+							var errstr = '密码错误';//这里是地雷，如果直接传中文IE下会报错
+							res.redirect('/chating/login/?err='+encodeURIComponent(errstr));
+							_pool.release(db_connector);
+						}
 						return true;
 					}
 					else{//去插入数据
@@ -150,7 +164,7 @@ home.chating = function(req, res, pathobj){
 						})
 					}
 					return true;
-			});
+			})
 		});
 	});
 	return true;
@@ -289,7 +303,7 @@ home.upload = function(req, res, pathobj){//上传头像
 		count = 0;
 	form.uploadDir = filedir;//设定上传目录
 	perfileobj = files_obj[ran] = {};
-	 form.on('progress', function(bytesReceived, bytesExpected ,ending){
+	 form.on('progress', function(bytesReceived, bytesExpected){
 		 	count++;
 			if(count%200 === 0){
 					perfileobj.br = bytesReceived;
@@ -316,8 +330,8 @@ home.upload = function(req, res, pathobj){//上传头像
 		else res.end(home.rescallback(func, '"'+perfileobj.size+'","'+perfileobj.path+'"'));
 		return true;
       }).on('error',function(err){
+		    delete files_obj[ran];
 			_logger.error('上传过程中出错：'+err);
-			delete files_obj[ran];
 	  });
     form.parse(req);
 	perfileobj.timestamp = (new Date()).getTime();

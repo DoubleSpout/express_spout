@@ -206,8 +206,8 @@ window.uploadcallback = Upload.prototype.uploadcallback = function(filesize, fil
 	}
 	Upload.prototype.intial = function(){		
 		var that = this;
-		$('#upload_form').submit(function(){	
-			if($('#face').val()==''){
+		$('#upload_form').submit(function(){
+			if(!$('#facefile').val()){
 				alert(that.picempty);
 				return false;
 			}

@@ -56,7 +56,7 @@ p{font-size:13px;}
 
 
 /*图片上传*/
-.fb {overflow: hidden; position: relative;width:65px; height:30px; float:left; margin-left:100px;}
+.fb {overflow: hidden; position: relative;width:65px; height:30px; float:left; margin-left:100px;_margin-left:50px;}
 .browse {cursor: pointer;display:block; position:absolute; top:0px;left:0px; width:48px; height:23px;}
 #uploadface {width:48px; height:23px;}
 .file_display{width:110px;/*这个宽度不能删除*/height:27px;filter:alpha(opacity=0);/*利用CSS滤镜让默认按钮为透明*/opacity:0;  position:absolute;cursor:pointer;left:-20px;top:0px; z-index:999;}
