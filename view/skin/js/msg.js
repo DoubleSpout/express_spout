@@ -17,8 +17,10 @@ function Message(id){
 	this.condition = $('#condition');
 	this.sorting = $('#sorting');
 	this.sname2 = $('#sname2');
+	this.pid = $('#pid');
 	this.page = 0; //初始页
 	this.perpagenum = 5;//一次获取多少个
+	this.intial();
 }
 Message.prototype.closehover = function(target, isout){
 	this.id.find('.'+this.closea).hide();
@@ -69,6 +71,11 @@ Message.prototype.ajaxsub = function(){
 		else alert(data.fail);
 		},'json')
 	}
+Message.prototype.reply = function(target){ //点击回复
+	this.pid.val(target.attr('aid'));
+	var val = '回复：';
+	this.icontent.focus().val(val);
+}
 Message.prototype.getmore = function(target){
 		var that = this,
 		    data = that.intialmore();//为more按钮初始化做准备
@@ -81,7 +88,7 @@ Message.prototype.getmore = function(target){
 						var s ='<div class="m_dm" style="display:none;">';
 						for(var i=0;i<d.msg.length;i++){
 							var dmi = d.msg[i];
-							s+='<p  class="i_i vnone" id="'+dmi._id+'"><strong>作者：'+dmi.name+'</strong><span>人气：<font>'+dmi.plus+'</font></span>时间：'+dmi.time+'<br>'+dmi.content+'<a href="javascript:;" name="plus" class="plus">+1</a><br><a style="display: none;" class="close" name="del" href="javascript:;">X</a></p>'
+							s+='<p  class="i_i vnone" id="'+dmi._id+'"><strong>作者：'+dmi.name+'</strong><span>人气：<font>'+dmi.plus+'</font></span>时间：'+dmi.time+'<br>'+dmi.content+'<a class="m_re" name="reply" aid="'+dmi._id+'" href="javascript:;">回复</a><a href="javascript:;" name="plus" class="plus">+1</a><br><a style="display: none;" class="close" name="del" href="javascript:;">X</a></p>'
 						}
 						s+='</div>';
 						that.state.before(s);
@@ -159,4 +166,3 @@ Message.prototype.intial = function(){
 	that.snameintial();
 }
 var msg = new Message('msg');
-msg.intial();

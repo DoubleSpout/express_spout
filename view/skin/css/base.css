@@ -15,7 +15,7 @@ h1 {color:#fff; font-size:37px; padding:30px 0 ;}
 em {color:#C3CC88; padding:0 3px;}
 pre {widht:100%; line-height:23px; background-color:#ddd; display:block; font-size:13px; padding:10px 20px 25px; border:#aaa 3px solid; font-family:Arial, Helvetica, sans-serif;}
 pre em {color:#222; font-size:14px; font-style:normal !important;}
-p.i_i { font-size:13px; line-height:23px; display:block; position:relative;}
+p.i_i { font-size:14px; line-height:26px; display:block; position:relative;}
 p.i_i strong {color:#8BC84B; padding:30px 0 5px 0; display:inline-block; font-size:15px;}
 a.i_a { margin:0 30px 0 0; display:inline-block; padding:5px 10px;}
 a.i_a:hover{background-color:#333;}
@@ -43,5 +43,8 @@ p.i_i a.close { display:block; width:30px; height:30px; position:absolute; text-
 .m_nob span { padding-left:30px;}
 .m_nob input { width:200px;}
 .m_nob .sname { color:#777 !important; }
+.m_re { margin-left:25px;text-decoration:underline !important;}
+.m_rec {display:block; line-height:18px; padding:5px 30px; font-size:14px;color:#777;font-style:normal;}
+.m_rec strong {font-size:14px !important;  line-height:25px !important; display:inline !important; padding:0px !important; font-weight:normal;}
 /*聊天室登录按钮*/.c_login { width:100%px; height:30px; line-height:30px; text-align:center; display:block; padding:0; margin:0; margin-top:40px;  font-size:14px; color:#fff !important;} 
 /*留言板*/

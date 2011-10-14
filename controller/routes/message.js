@@ -1,12 +1,14 @@
 var home = {},
 	fdate = require('../../modules/stools').fdate,
 	htmltostring = require('../../modules/stools').htmltostring,
-	validate = require('../../modules/validate');
+	validate = require('../../modules/validate'),
+	AsyncProxy = require('../../modules/AsyncProxy.js');
+
 
 home.initial = function(){ //初始化
 _pool.acquire(function(err, db_connector){
 		db_connector.createCollection("msg", function(err, collection){
-		   collection.ensureIndex({"plus":-1}, function(err, r){ //这里建立一个根据plus点数排序的索引
+		   collection.ensureIndex({"plus":-1,"pid":-1}, function(err, r){ //这里建立一个根据plus点数排序的索引
 			   if(err) _logger.error('索引建立失败：'+err);
 			   else{ 
 					   _logger.info('索引建立名为：'+r);
@@ -34,13 +36,40 @@ home.getmsg = function(sorting, sname, condition, pagenum, callback){ //获取�
 				condition != true?sortc.skip = parseInt(condition):'';
 			}	
 			sortc.limit = pagenum;//每次发送多少个
+			findc.pid = 0;
 			var cursor = collection.find(findc,sortc);
 			cursor.count(function(err, count){
 				var total = count||0;//总数
 				cursor.toArray(function(err, results){
 					var msgarray = results||false;//获取全部的
-					callback(err, msgarray, total);
-					_pool.release(db_connector);
+					var len = msgarray.length;
+					if(len == 0){
+						callback(err, msgarray, total);
+						_pool.release(db_connector);
+						return true;
+					}
+					var ap = new AsyncProxy(true),
+					    apfunc = [],
+						apall = function(){
+							//_logger.info('数据获取完毕');
+							callback(err, msgarray, total);
+							_pool.release(db_connector);
+							ap=null;
+						}
+					for (var j=0; j<len; j++ ){
+							var func = function(order){
+									collection.find({"pid":msgarray[order]._id+''}).toArray(function(err, results){
+										//_logger.info(order);
+										//_logger.info(results)
+										msgarray[order].reply = results
+										ap.rec(order, results); 
+									});
+							}
+						   apfunc.push(func);
+					}
+					apfunc.push(apall);
+					var total = ap.ap.apply(ap, apfunc);
+					_logger.info("共有多少次异步操作："+total)
 				});
 		    });
 			return true;
@@ -83,27 +112,31 @@ home.more = function(req, res, pathobj){
 }
 home.send = function(req, res, pathobj){
 	var name = req.param('name'),
-		content = req.param('content');
+		content = req.param('content'),
+		pid = req.param('pid');
 	if(name.length>15){res.end(JSON.stringify({"suc":0,"fail":"用户名过长"}));return true;}
-	if(content.length>30){res.end(JSON.stringify({"suc":0,"fail":"内容过长"}));return true;}
+	if(content.length>150){res.end(JSON.stringify({"suc":0,"fail":"内容过长"}));return true;}
+	if(!pid || pid.length !== 24){pid=0;}
 	var data = {
 		name : htmltostring(name),
 		content : htmltostring(content),
 		time : fdate('y-m-d h:m:s'),
 		plus:0,
+		pid:pid,
+		ip:req.ip,
 	}
-_pool.acquire(function(err, db_connector){
-		db_connector.collection("msg", function(err, collection){
-			collection.insert(data, function(err, r){
-				if(err){
-				   res.end(JSON.stringify({"suc":0, "fail":"提交失败"}));
-				   _logger.error('提交留言失败：'+err)
-				}
-				else  res.end(JSON.stringify({"suc":1}));
-				_pool.release(db_connector);
-			});
-		})	
-})
+	_pool.acquire(function(err, db_connector){
+			db_connector.collection("msg", function(err, collection){
+				collection.insert(data, function(err, r){
+					if(err){
+					   res.end(JSON.stringify({"suc":0, "fail":"提交失败"}));
+					   _logger.error('提交留言失败：'+err)
+					}
+					else  res.end(JSON.stringify({"suc":1}));
+					_pool.release(db_connector);
+				});
+			})	
+	})
 	return true;
 } 
 home.del = function(req, res, pathobj){//执行删除操作
@@ -114,7 +147,7 @@ home.del = function(req, res, pathobj){//执行删除操作
 	//判断合法性id的合法性和用户是否有权力
 _pool.acquire(function(err, db_connector){
 		db_connector.collection("msg", function(err, collection){
-			collection.remove({_id:db_connector.bson_serializer.ObjectID.createFromHexString(id)},{safe:true},function(err, r){
+			collection.remove({$or:[{_id:db_connector.bson_serializer.ObjectID.createFromHexString(id)},{pid:id}]},{safe:true},function(err, r){
 					if(err){
 						_logger.error('删除失败，id为：'+id+'失败原因：'+err);
 						res.end(JSON.stringify({"suc":0,"fail":"操作失败"}));

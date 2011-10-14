@@ -13,7 +13,10 @@ html
     div#msg
      -if(total){
       -msg.forEach(function(msgi){
-       p.i_i(id="#{msgi._id}") <strong>作者：#{msgi.name}</strong><span>人气：<font>#{msgi.plus}</font></span>时间：#{msgi.time}<br />#{msgi.content}<a class="plus" name="plus" href="javascript:;">+1</a><br /><a href="javascript:;"  name="del" class="close" style="display:none">X</a>
+       p.i_i(id="#{msgi._id}") <strong>作者：#{msgi.name}</strong><span>人气：<font>#{msgi.plus}</font></span>时间：#{msgi.time}<br />#{msgi.content}<a class="m_re" name="reply" aid="#{msgi._id}" href="javascript:;">回复</a><a class="plus" name="plus" href="javascript:;">+1</a><br /><a href="javascript:;"  name="del" class="close" style="display:none">X</a>
+        -msgi.reply.forEach(function(msgri){
+         i.m_rec <strong name="#{msgri.pid}">#{msgri.name} </strong>#{msgri.content}<br/>
+        -})
       -})
       div.m_state 
        共 <font>#{total}</font> 篇留言<a href="javascript:;" id="getmore"  name="getmore" class="plus">查看更多留言内容</a>
@@ -24,8 +27,8 @@ html
     form#send
      p.i_i <strong>发表留言：</strong>
      p.i_i.m_i 作 者：<input name="name" id="name" value="" class="m_i_i" maxlength="15" autocomplete="off"/>
-     p.i_i.m_i 内 容：<input name="content" id="content" value="" class="m_i_i" maxlength="60" autocomplete="off" >
-     p.i_i.m_i <a id="ajaxsub" class="plus" href="javascript:;">提交</a><input type="submit" value="提交" class="none"/>
+     p.i_i.m_i 内 容：<input name="content" id="content" value="" class="m_i_i" maxlength="145" autocomplete="off" >
+     p.i_i.m_i <input name="pid" id="pid" value="0" autocomplete="off" type="hidden"/><a id="ajaxsub" class="plus" href="javascript:;">提交</a><input type="submit" value="提交" class="none"/>
 include ../include/foot
 script(type="text/javascript",src="/skin/js/msg.js")
 </body>
