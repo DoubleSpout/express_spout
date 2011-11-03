@@ -280,6 +280,7 @@ home.receive = function(req, res, pathobj){//接收聊天信息
 				"msg" : msg_array,
 				"memlist" :home.getmemlist(),//获取在线用户
 			}
+		res.setHeader('Content-Type','ajax/json; charset=utf-8')
 		res.end(JSON.stringify(rec_r));
 		return true;
 	})
