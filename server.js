@@ -9,8 +9,7 @@ require('./controller/routes.js');//路由
 
 _logger = require('./modules/log4js');//日志模块加载进来
 if (!module.parent) {  //如果没有被require调用，则监听端口，否则作为一个组件被其他网站调用
-	var cluster = require('cluster')
-	_cluster = cluster(_app).set('working directory', '/').set('workers', 1).use(cluster.reload()).listen(_app.set('port'));
+	_app.listen(_app.set('port'));
 	_logger.info('Express started on port'+_app.set('port'));
 };
 _jade_render = require('./modules/jade_render.js');//会根据文件缓存是否开启来进行显示页面

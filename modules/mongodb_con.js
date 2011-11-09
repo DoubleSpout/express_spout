@@ -13,7 +13,7 @@ var pool = poolModule.Pool({
 				   })
         },
         destroy  : function(db) { db.close(); }, //当超时则释放连接
-        max      : 50,   //最大连接数
+        max      : 1,   //最大连接数
         idleTimeoutMillis : 1000*30,  //超时时间
         log : false,  
     });

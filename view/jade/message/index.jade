@@ -15,7 +15,7 @@ html
       -msg.forEach(function(msgi){
        p.i_i(id="#{msgi._id}") <strong>作者：#{msgi.name}</strong><span>人气：<font>#{msgi.plus}</font></span>时间：#{msgi.time}<br />#{msgi.content}<a class="m_re" name="reply" aid="#{msgi._id}" href="javascript:;">回复</a><a class="plus" name="plus" href="javascript:;">+1</a><br /><a href="javascript:;"  name="del" class="close" style="display:none">X</a>
         -msgi.reply.forEach(function(msgri){
-         i.m_rec <strong name="#{msgri.pid}">#{msgri.name} </strong>#{msgri.content}<br/>
+         i.m_rec <strong name="#{msgri._id}">#{msgri.name}</strong> #{msgri.content}<br/>
         -})
       -})
       div.m_state 
@@ -28,7 +28,17 @@ html
      p.i_i <strong>发表留言：</strong>
      p.i_i.m_i 作 者：<input name="name" id="name" value="" class="m_i_i" maxlength="15" autocomplete="off"/>
      p.i_i.m_i 内 容：<input name="content" id="content" value="" class="m_i_i" maxlength="145" autocomplete="off" >
-     p.i_i.m_i <input name="pid" id="pid" value="0" autocomplete="off" type="hidden"/><a id="ajaxsub" class="plus" href="javascript:;">提交</a><input type="submit" value="提交" class="none"/>
+     p.i_i.m_i <a id="ajaxsub" class="plus" href="javascript:;">提交</a><input type="submit" value="提交" class="none"/><input name="pid" id="pid" value="0" autocomplete="off" type="hidden"/>
+    p#captchabox.none
+     span.cap_t 为了证明您发表留言的重要性和您与众不同的智慧与才华，请选择<b id="cap_value">剪刀</b>，并将其拖拽到下面的方框中。
+     input#poid(type="hidden", value="")
+     span#cap_img
+     span#cap_b
+      span.cap_b_c
+      span.cap_b 拖到这里
+
 include ../include/foot
+script(type="text/javascript",src="/skin/js/plugin/thickbox.js")
+script(type="text/javascript",src="/skin/js/plugin/jquery.drag.js")
 script(type="text/javascript",src="/skin/js/msg.js")
 </body>

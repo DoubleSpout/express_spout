@@ -10,6 +10,7 @@ function Message(id){
 	this.sendurl = '/message/send/';
 	this.delurl = '/message/del/';
 	this.moreurl = '/message/more/';
+	this.getcapurl = '/message/getcaptcha/'
 	this.form = $('#send');
 	this.subtb = $('#ajaxsub');
 	this.state = $('.m_state');
@@ -18,8 +19,11 @@ function Message(id){
 	this.sorting = $('#sorting');
 	this.sname2 = $('#sname2');
 	this.pid = $('#pid');
+	this.po = $('po');
+	this.poid = $('poid');
 	this.page = 0; //初始页
 	this.perpagenum = 5;//一次获取多少个
+	this.ajaxing = false;
 	this.intial();
 }
 Message.prototype.closehover = function(target, isout){
@@ -57,18 +61,24 @@ Message.prototype.plus = function(target){
 		},'json')
 	return false;
 	}
-Message.prototype.ajaxsub = function(){
-	var isok = true;
-	this.form.find('input').each(function(){
-		if($.trim($(this).val()) === ''){
-			isok = false;
-		}
-	})
-	if(!isok){alert('作者或内容不能为空'); return false;}
-	var data = this.form.serialize();
+Message.prototype.ajaxsub = function(po){
+	var that = this;
+	if(that.ajaxing) return false;
+	var data = {
+	poid: $('#poid').val(),//验证码ID
+	pid: $('#pid').val(),//是否是回复ID
+	po:po,
+	name:$('#name').val(),
+	content:$('#content').val()
+	}
+	that.ajaxing = true;
 	$.get(this.sendurl,data, function(data){
+		that.ajaxing = false;
 		if(data.suc ==1) location.href = '/message/'
-		else alert(data.fail);
+		else{
+			tb_remove();
+			alert(data.fail);			
+		}
 		},'json')
 	}
 Message.prototype.reply = function(target){ //点击回复
@@ -79,7 +89,10 @@ Message.prototype.reply = function(target){ //点击回复
 Message.prototype.getmore = function(target){
 		var that = this,
 		    data = that.intialmore();//为more按钮初始化做准备
+		if(that.ajaxing) return false;
+		that.ajaxing = true;
 		$.get(that.moreurl, data, function(d){
+			    that.ajaxing = false;
 				if(d.suc==1){
 					if(d.msg.length == 0){
 						target.css('visibility','hidden');
@@ -117,8 +130,6 @@ Message.prototype.intialmore = function(){
 		}
 		return d
 }
-
-
 Message.prototype.snameintial = function(){ 	
 	var that = this;
 	var snameval = '输入关键字，按回车搜索',
@@ -136,7 +147,48 @@ Message.prototype.snameintial = function(){
 		return false;
 	})
 	}
+Message.prototype.getcaptcha = function(){
+	var that = this;
+	if(that.ajaxing) return false;
+	that.ajaxing = true;
+	$.get(this.getcapurl,{"a":"getcap"},function(data){
+		that.ajaxing = false;
+		if(data.suc != 1){
+			alert(data.fail);
+			return false;
+		}
+		that.putcaptcha(data);
+	},'json')
+}
+Message.prototype.putcaptcha = function(data){
+	var val = data.data.value,
+		poid = data.data.id,
+	    len = data.data.caary.length,
+		htmls = '';
+	$('#poid').val(poid);
+	$('#cap_value').html(val);
+	for(var i=0;i<len;i++){
+		var ci = data.data.caary[i];
+		htmls += '<img src="'+ci.url+'" title="图片" po="'+i+'" />';
+	}
+	$('#cap_img').html(htmls);
+	this.captchaintial()
+}
+Message.prototype.captchaintial = function(){
+var that = this;
+	$('#cap_img img').draggable({opacity: 0.7, 
+		helper: "clone",
+		zIndex:14,
+		stop:function(event, ui){
+			var l = ui.position.left,
+				t = ui.position.top;
+			if((l>83&&l<190)&&(t>58&&t<190)) that.ajaxsub(ui.helper.attr('po'));		
+		}
+	});
 
+	$('.cap_b_c').hover(function(){$('.cap_b').addClass('cap_b_ho');},function(){$('.cap_b').removeClass('cap_b_ho');})
+	tb_show('','#TB_inline?height=330&width=400&inlineId=captchabox')
+	}
 Message.prototype.intial = function(){
 	var that = this;
 	that.id.mouseover(function(event){
@@ -156,7 +208,14 @@ Message.prototype.intial = function(){
 		return false;
 		})
 	that.form.submit(function(){
-		that.ajaxsub();
+		var isok = true;
+		that.form.find('input').each(function(){
+			if($.trim($(this).val()) === ''){
+				isok = false;
+			 }
+		})
+		if(!isok){alert('作者或内容不能为空'); return false;}
+		that.getcaptcha()
 		return false;
 		})
 	that.subtb.click(function(){

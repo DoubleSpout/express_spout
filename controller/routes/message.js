@@ -1,10 +1,10 @@
 var home = {},
 	fdate = require('../../modules/stools').fdate,
 	htmltostring = require('../../modules/stools').htmltostring,
+	check_all_param = require('../../modules/stools').check_all_param,
 	validate = require('../../modules/validate'),
-	AsyncProxy = require('../../modules/AsyncProxy.js');
-
-
+	AsyncProxy = require('../../modules/AsyncProxy.js'),
+	ca = require('../../modules/captcha.js');
 home.initial = function(){ //初始化
 _pool.acquire(function(err, db_connector){
 		db_connector.createCollection("msg", function(err, collection){
@@ -18,7 +18,7 @@ _pool.acquire(function(err, db_connector){
 					   });
 				   }
 			});			
-		});
+		}); 
 })
 }();
 home.getmsg = function(sorting, sname, condition, pagenum, callback){ //获取数据
@@ -91,6 +91,7 @@ home.more = function(req, res, pathobj){
 		sname = htmltostring(req.param('sname')),
 		condition = req.param('condition'),
 		pagenum = req.param('pagenum');
+	if(!check_all_param(sorting, condition, pagenum)){res.end(JSON.stringify({"suc":0,"fail":"获取更多信息参数错误"}));return true;}
 	sname = sname == 'true' ? true:sname;
 	if(parseInt(sorting) != sorting){res.end(JSON.stringify({"suc":0,"fail":"排序参数错误"}));return true;};
 	if(sname == '' || typeof sname === 'undefined'){res.end(JSON.stringify({"suc":0,"fail":"作者名错误"}));return true;};
@@ -110,33 +111,57 @@ home.more = function(req, res, pathobj){
 	})
 	return true;
 }
+home.getcaptcha = function(req, res, pathobj){
+	var ac = req.param('a');
+	if(!check_all_param(ac)){res.end(JSON.stringify({"suc":0,"fail":"获取验证码参数错误"}));return true;}
+	if(ac != 'getcap'){res.end(JSON.stringify({"suc":0,"fail":"获取验证码action错误"}));return true;}
+	var sendca = function(caobj){
+		if(!caobj){res.end(JSON.stringify({"suc":0,"fail":"验证码获取失败"}));return true;}
+		res.end(JSON.stringify({"suc":1, "data":caobj}))
+	}
+	ca.creat(sendca);
+	return true;
+}
 home.send = function(req, res, pathobj){
 	var name = req.param('name'),
 		content = req.param('content'),
-		pid = req.param('pid');
-	if(name.length>15){res.end(JSON.stringify({"suc":0,"fail":"用户名过长"}));return true;}
-	if(content.length>150){res.end(JSON.stringify({"suc":0,"fail":"内容过长"}));return true;}
-	if(!pid || pid.length !== 24){pid=0;}
-	var data = {
-		name : htmltostring(name),
-		content : htmltostring(content),
-		time : fdate('y-m-d h:m:s'),
-		plus:0,
-		pid:pid,
-		ip:req.ip,
+		pid = req.param('pid'),
+		po = req.param('po'),
+		poid = req.param('poid');
+	if(!check_all_param(name, content, pid, po, poid)){res.end(JSON.stringify({"suc":0,"fail":"send参数错误"}));return true;}
+	if(parseInt(po) != po || parseInt(po)<0 || parseInt(po)>(ca.canum-1)){res.end(JSON.stringify({"suc":0,"fail":"位置错误"}));return true;}//用户拖拽的图片位置参数错误
+	if(poid.length !== 24){res.end(JSON.stringify({"suc":0,"fail":"验证码ID错误"}));return true;}
+	var sendc = function(ca_bool){
+		if(!ca_bool){
+			res.end(JSON.stringify({"suc":0,"fail":"验证码失败，你是非人类！"}));
+			return true;
+		}
+		if(name.length>15){res.end(JSON.stringify({"suc":0,"fail":"用户名过长"}));return true;}
+		if(content.length>150){res.end(JSON.stringify({"suc":0,"fail":"内容过长"}));return true;}
+		if(!pid || pid.length !== 24){pid=0;}
+		var data = {
+			name : htmltostring(name),
+			content : htmltostring(content),
+			time : fdate('y-m-d h:m:s'),
+			plus:0,
+			pid:pid,
+			ip:req.ip,
+		}
+		_pool.acquire(function(err, db_connector){
+				db_connector.collection("msg", function(err, collection){
+					collection.insert(data, function(err, r){
+						if(err){
+						   res.end(JSON.stringify({"suc":0, "fail":"提交失败"}));
+						   _logger.error('提交留言失败：'+err)
+						}
+						else  res.end(JSON.stringify({"suc":1}));
+						_pool.release(db_connector);
+					});
+				})	
+		})
+		return true;
 	}
-	_pool.acquire(function(err, db_connector){
-			db_connector.collection("msg", function(err, collection){
-				collection.insert(data, function(err, r){
-					if(err){
-					   res.end(JSON.stringify({"suc":0, "fail":"提交失败"}));
-					   _logger.error('提交留言失败：'+err)
-					}
-					else  res.end(JSON.stringify({"suc":1}));
-					_pool.release(db_connector);
-				});
-			})	
-	})
+	ca.contrast(poid, po, sendc);//去验证验证码
 	return true;
 } 
 home.del = function(req, res, pathobj){//执行删除操作
