@@ -23,10 +23,10 @@ captcha.decode = function(str){
 		tsfront = str.slice(0, parseInt(head, 10)),
 		id = str.slice(parseInt(head, 10), parseInt(head, 10)+2),
 		intid = parseInt(id, 10),
-		tsback = str.slice(parseInt(head)+2, 10),
+		tsback = str.slice(parseInt(head)+2),
 		ts = tsfront + tsback,
 		now = (new Date()).getTime();
-	if(now - (new Date(ts)).getTime() > 1000*60*30) return false;
+	if(now -ts > 1000*15) return false;
 	if(intid != id) return false;
 	return intid;	
 }
