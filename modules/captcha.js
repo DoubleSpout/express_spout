@@ -52,7 +52,7 @@ captcha.mongodbcreat = function(u_obj, cb){
 				_pool.release(db_connector);
 				return true;
 			 }
-			 ary[po].timestamp = (new Date()).getTime();
+			 ary[po].timestamp = new Date();
 			 ary[po].po = po;
 			 collection.insert(ary[po], {safe:true}, function(err, doc){	
 					 _pool.release(db_connector);
@@ -92,11 +92,11 @@ captcha.contrast = function(id, po, cb){ //判断验证码
 	})
 }
 captcha.destory = function(timestamp, id){ //删除验证码
-	var delc = {"timestamp":{"$lt":timestamp}}
-	if(typeof id == 'undefined'){
+	var delc = {"timestamp":{"$lt":new Date(timestamp)}}
+ _pool.acquire(function(err, db_connector){
+	 if(typeof id !== 'undefined'){
 		delc = {"_id":db_connector.bson_serializer.ObjectID.createFromHexString(id)}
 	}
- _pool.acquire(function(err, db_connector){
 	 db_connector.collection(captcha.dbcolname, function(err, collection){
 		 collection.remove(delc, function(err, num){
 			if(err) _logger.err('摧毁验证码失败：'+err);
@@ -128,6 +128,5 @@ captcha.intial = function(){ //初始化，异步脚本删除验证码
 	  var now = (new Date()).getTime()-1000*60*30;
 	  captcha.destory(now);
 	}, 1000*60*30);
-
 }()
 module.exports = captcha;
