@@ -83,7 +83,7 @@ captcha.contrast = function(id, po, cb){ //判断验证码
 			collection.findOne({'_id':db_connector.bson_serializer.ObjectID.createFromHexString(id)},function(err, r){
 				var res = false;
 				if(err) _logger.err('对比验证码失败：'+err);
-				else if(r.po == po) res=true;	//如果对比成功，返回true，否则为false
+				else if(r && r.po == po) res=true;	//如果对比成功，返回true，否则为false
 				_pool.release(db_connector);
 				captcha.destory('', id)
 				cb(res);
