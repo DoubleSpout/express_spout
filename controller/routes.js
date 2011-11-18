@@ -88,12 +88,15 @@ var analyze_url = function(req){
 		req.useragent = req.headers['user-agent'] || '';//客户端信息
 		if(pathobj.isstatic === 'static') { //如果用户访问的是静态文件
 			var static_p = viewpath+'/'+pathobj.path+pathobj.file;
-			if(!path.existsSync(static_p)){
-				_logger.warn(req.ip+' -- not find static file: '+static_p);
-				res.end('not find static file');
+			path.exists(static_p, function (exists) {
+				if(!exists){
+					_logger.warn(req.ip+' -- not find static file: '+static_p);
+					res.end('not find static file');
+					return false;
+				}
+				else next(); //如果是访问skin或是temp的，则当成静态文件处理，转发请求下去
 				return false;
-			}
-			else next(); //如果是访问skin或是temp的，则当成静态文件处理，转发请求下去
+			});
 			return false;
 		}
 		try{ //测试证明这里的try不会影响性能
