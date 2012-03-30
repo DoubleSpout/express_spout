@@ -1,1 +1,145 @@
-﻿
+﻿[2011-11-09 08:59:53.719] [INFO] console - Express started on port3000
+[2011-11-09 08:59:54.095] [INFO] console - Express started on port3000
+[2011-11-09 09:00:02.334] [INFO] console - 创建piccaptcha集合成功:piccaptcha
+[2011-11-09 09:00:02.340] [INFO] console - 索引建立名为：plus_-1_pid_-1
+[2011-11-09 09:00:02.341] [INFO] console - 当前msg集合所有索引为：{"_id_":[["_id",1]],"plus_-1_pid_-1":[["plus",-1],["pid",-1]]}
+[2011-11-09 09:00:22.587] [INFO] console - 执行循环
+[2011-11-09 09:00:25.924] [INFO] console - 索引建立名为：username_1
+[2011-11-09 09:00:25.925] [INFO] console - 当前msg集合所有索引为：{"_id_":[["_id",1]],"username_1":[["username",1]]}
+[2011-11-09 09:01:22.592] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:01:22.593] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:02:22.765] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:02:22.766] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:03:22.591] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:03:22.592] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:04:22.591] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:04:22.591] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:05:22.591] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:05:22.591] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:06:22.590] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:06:22.591] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:07:22.590] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:07:22.590] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:08:22.590] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:08:22.590] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:09:22.606] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:09:22.606] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:10:22.589] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:10:22.590] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:11:22.593] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:11:22.593] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:12:22.593] [INFO] console - 截断前a_m数量：0 截断前p_m数量：0
+[2011-11-09 09:12:22.593] [INFO] console - 截断后a_m数量：0 截断后p_m数量：0
+[2011-11-09 09:12:31.642] [ERROR] console - TypeError: Cannot call method 'collection' of null
+    at /www/htdocs/nodejs/express_spout/controller/routes/message.js:26:16
+    at adjustCallback (/www/htdocs/nodejs/express_spout/node_modules/generic-pool/lib/generic-pool.js:186:7)
+    at /www/htdocs/nodejs/express_spout/node_modules/generic-pool/lib/generic-pool.js:229:15
+    at /www/htdocs/nodejs/express_spout/modules/mongodb_con.js:12:8
+    at /www/htdocs/nodejs/express_spout/node_modules/mongodb/lib/mongodb/db.js:92:30
+    at [object Object].<anonymous> (/www/htdocs/nodejs/express_spout/node_modules/mongodb/lib/mongodb/connections/server.js:114:12)
+    at [object Object].emit (events.js:64:17)
+    at Object._onTimeout (/www/htdocs/nodejs/express_spout/node_modules/mongodb/lib/mongodb/connection.js:184:14)
+    at Timer.callback (timers.js:83:39)
+[2011-11-09 09:22:47.380] [INFO] console - Express started on port3000
+[2011-11-09 09:22:47.808] [INFO] console - Express started on port3000
+[2011-11-09 09:22:54.959] [INFO] console - 创建piccaptcha集合成功:piccaptcha
+[2011-11-09 09:22:54.963] [INFO] console - 索引建立名为：plus_-1_pid_-1
+[2011-11-09 09:22:54.964] [INFO] console - 当前msg集合所有索引为：{"_id_":[["_id",1]],"plus_-1_pid_-1":[["plus",-1],["pid",-1]]}
+[2011-11-09 09:23:21.773] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-09 09:23:21.836] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 09:23:23.116] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 09:30:01.575] [ERROR] console - TypeError: Cannot call method 'collection' of null
+    at /www/htdocs/nodejs/express_spout/controller/routes/message.js:26:16
+    at adjustCallback (/www/htdocs/nodejs/express_spout/node_modules/generic-pool/lib/generic-pool.js:186:7)
+    at /www/htdocs/nodejs/express_spout/node_modules/generic-pool/lib/generic-pool.js:229:15
+    at /www/htdocs/nodejs/express_spout/modules/mongodb_con.js:12:8
+    at /www/htdocs/nodejs/express_spout/node_modules/mongodb/lib/mongodb/db.js:92:30
+    at [object Object].<anonymous> (/www/htdocs/nodejs/express_spout/node_modules/mongodb/lib/mongodb/connections/server.js:114:12)
+    at [object Object].emit (events.js:64:17)
+    at Object._onTimeout (/www/htdocs/nodejs/express_spout/node_modules/mongodb/lib/mongodb/connection.js:184:14)
+    at Timer.callback (timers.js:83:39)
+[2011-11-09 09:41:39.053] [INFO] console - Express started on port3000
+[2011-11-09 09:59:58.594] [INFO] console - Express started on port3000
+[2011-11-09 13:52:08.755] [INFO] console - Express started on port3000
+[2011-11-09 13:52:09.126] [INFO] console - Express started on port3000
+[2011-11-09 13:52:24.529] [INFO] console - 创建piccaptcha集合成功:piccaptcha
+[2011-11-09 13:52:24.532] [INFO] console - 索引建立名为：plus_-1_pid_-1
+[2011-11-09 13:52:24.534] [INFO] console - 当前msg集合所有索引为：{"_id_":[["_id",1]],"plus_-1_pid_-1":[["plus",-1],["pid",-1]]}
+[2011-11-09 13:52:24.588] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 13:56:47.962] [INFO] console - Express started on port3000
+[2011-11-09 13:56:48.337] [INFO] console - Express started on port3000
+[2011-11-09 13:56:55.666] [INFO] console - 创建piccaptcha集合成功:piccaptcha
+[2011-11-09 13:56:55.673] [INFO] console - 索引建立名为：plus_-1_pid_-1
+[2011-11-09 13:56:55.701] [INFO] console - 当前msg集合所有索引为：{"_id_":[["_id",1]],"plus_-1_pid_-1":[["plus",-1],["pid",-1]]}
+[2011-11-09 13:56:55.792] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 13:56:57.942] [INFO] console - Express started on port3000
+[2011-11-09 13:56:59.930] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 13:57:04.225] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 13:57:36.915] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 13:59:11.593] [INFO] console - Express started on port3000
+[2011-11-09 13:59:11.602] [ERROR] console - Error: EADDRINUSE, Address already in use
+    at startListening (/www/htdocs/nodejs/node_modules/cluster/lib/master.js:818:9)
+    at Master.startListening (/www/htdocs/nodejs/node_modules/cluster/lib/master.js:811:5)
+    at Master.<anonymous> (/www/htdocs/nodejs/node_modules/cluster/lib/master.js:279:12)
+    at Master.emit (events.js:81:20)
+    at Array.<anonymous> (/www/htdocs/nodejs/node_modules/cluster/lib/master.js:333:12)
+    at EventEmitter._tickCallback (node.js:126:26)
+[2011-11-09 14:00:58.356] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:03:39.686] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:04:09.493] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:04:27.384] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:05:03.084] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:05:18.812] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:05:23.166] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-09 14:06:02.358] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:13:05.689] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:13:43.087] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:14:05.557] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:14:30.131] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:14:50.096] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:14:50.431] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:14:50.658] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:15:46.203] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:16:35.807] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:17:34.595] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:19:00.204] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:19:21.774] [INFO] console - 共有多少次异步操作：1
+[2011-11-09 14:19:37.288] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-09 14:19:37.344] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:19:47.956] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-09 14:19:51.681] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:20:25.516] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:21:15.708] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:21:27.735] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:21:45.337] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:22:24.697] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:22:33.937] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:24:10.255] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:24:19.802] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:25:44.357] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:25:50.517] [INFO] console - 共有多少次异步操作：2
+[2011-11-09 14:26:48.396] [ERROR] console - ReferenceError: db_connector is not defined
+    at Object.destory (/www/htdocs/nodejs/express_spout/modules/captcha.js:97:3)
+    at Timer.callback (/www/htdocs/nodejs/express_spout/modules/captcha.js:129:12)
+[2011-11-04 13:23:39.412] [INFO] console - Express started on port3000
+[2011-11-04 13:24:09.144] [INFO] console - Express started on port3000
+[2011-11-04 13:24:10.140] [INFO] console - 创建piccaptcha集合成功:piccaptcha
+[2011-11-04 13:24:10.140] [INFO] console - 索引建立名为：plus_-1_pid_-1
+[2011-11-04 13:24:10.140] [INFO] console - 当前msg集合所有索引为：{"_id_":[["_id",1]],"plus_-1":[["plus",-1]],"plus_-1_pid_-1":[["plus",-1],["pid",-1]]}
+[2011-11-04 13:28:32.395] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:34:45.705] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:34:45.715] [INFO] console - 共有多少次异步操作：1
+[2011-11-04 13:34:47.384] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:34:50.149] [INFO] console - 共有多少次异步操作：1
+[2011-11-04 13:34:50.265] [INFO] console - 共有多少次异步操作：1
+[2011-11-04 13:34:50.368] [INFO] console - 共有多少次异步操作：1
+[2011-11-04 13:34:53.477] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:34:53.492] [INFO] console - 共有多少次异步操作：2
+[2011-11-04 13:34:55.340] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:35:16.118] [INFO] console - 共有多少次异步操作：2
+[2011-11-04 13:35:17.586] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:35:17.593] [INFO] console - 共有多少次异步操作：3
+[2011-11-04 13:35:19.707] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:35:21.591] [INFO] console - 摧毁验证码成功：undefined
+[2011-11-04 13:35:59.738] [INFO] console - 共有多少次异步操作：3
+[2011-11-04 13:36:01.984] [INFO] console - 摧毁验证码成功：undefined
