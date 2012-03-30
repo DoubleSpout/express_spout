@@ -1,4 +1,8 @@
-﻿本例访问地址：http://spout.cnodejs.net/
+﻿# 本项目已经不在维护，转至 www.rrestjs.com
+# rrestjs —— HIgh performance node.js ROA  RESTFUL  web framework
+
+
+本例访问地址：http://spout.cnodejs.net/
 虽然node.js作为数据中间件被一些企业应用，但是node.js建立中小型网站想必是大家最想做的事情。
 目前node.js框架最出名的也就是expressjs了，这两天我对expressjs做了一个简单的二次开发，增加了一些功能：
 1、加强路由功能
