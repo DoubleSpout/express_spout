@@ -1,6 +1,4 @@
-﻿# 本项目已经不在维护，转至 www.rrestjs.com
-
-## rrestjs —— HIgh performance node.js ROA  RESTFUL  web framework
+﻿# 本项目已经不在维护，转至 www.rrestjs.com, rrestjs —— HIgh performance node.js ROA  RESTFUL  web framework
 
 本例访问地址：http://spout.cnodejs.net/
 虽然node.js作为数据中间件被一些企业应用，但是node.js建立中小型网站想必是大家最想做的事情。
